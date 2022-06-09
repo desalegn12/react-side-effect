@@ -7,7 +7,7 @@ const gzipSize = require('gzip-size')
 
 const { name, dir } = path.parse(pkg.main)
 
-const filebase = `${dir}/${name}`
+const fireBase = `${dir}/${name}`
 
 process.chdir(path.resolve(__dirname, '..'))
 
@@ -18,12 +18,12 @@ const exec = (command, extraEnv) =>
   })
 
 const formats = [
-  { format: 'cjs', file: `${filebase}.js`, description: 'CJS module' },
-  { format: 'es', file: `${filebase}.es.js`, description: 'ES module' },
-  { format: 'umd', file: `${filebase}.umd.js`, description: 'UMD module' },
+  { format: 'cjs', file: `${fireBase}.js`, description: 'CJS module' },
+  { format: 'es', file: `${fireBase}.es.js`, description: 'ES module' },
+  { format: 'umd', file: `${fireBase}.umd.js`, description: 'UMD module' },
   {
     format: 'umd',
-    file: `${filebase}.umd.min.js`,
+    file: `${fireBase}.umd.min.js`,
     description: 'minified UMD module',
     env: {
       BUILD_ENV: 'production',
@@ -39,6 +39,6 @@ for (const { format, file, description, env } of formats) {
 for (const { file, description } of formats) {
   const minifiedFile = fs.readFileSync(file)
   const minifiedSize = prettyBytes(minifiedFile.byteLength)
-  const gzippedSize = prettyBytes(gzipSize.sync(minifiedFile))
-  console.log(`The ${description} is ${minifiedSize}, (${gzippedSize} gzipped)`)
+  const gZippedSize = prettyBytes(gzipSize.sync(minifiedFile))
+  console.log(`The ${description} is ${minifiedSize}, (${gZippedSize} gzipped)`)
 }
